@@ -1,17 +1,27 @@
 source 'https://rubygems.org'
 
 group :test, :development do
-  gem 'capybara'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'colorize'
   gem 'annotate'
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'quiet_assets'
+  
+
+  # This cause RSpec to output misunderstainding error message.
+  # So, use this gem under group :development ( not :test)
+  #gem 'better_errors'
 end
 
+group :development do
+  # Neat output on terminal console.
+  gem 'binding_of_caller'
+  gem 'quiet_assets'
+  gem 'better_errors'
+end
 
+group :test do
+  gem 'capybara'
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'

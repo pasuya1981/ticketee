@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+
+  root "projects#index"
+
+  match "projects", to: "projects#index", via: [:get], as: 'projects'
+  match 'projects', to: 'projects#create', via: :post
+  match "projects/new", to: "projects#new", via: :get, as: 'new_project'
+  match "projects/:id/edit", to: 'projects#edit', via: :get, as: 'edit_project'
+  match 'projects/:id', to: 'projects#show', via: :get, as: 'project'
+  match 'projects/:id', to: 'projects#update', via: [:patch, :put]
+  match 'projects/:id', to: 'projects#destroy', via: :delete
+
+  controller :projects do
+
+    #get "projects/:id" => 'projects#index', as: 'projects'
+    #post "projects/:id" => 'projects#index', as: 'projects'
+    #get :new, as: :new_project
+
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
