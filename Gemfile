@@ -1,12 +1,8 @@
 source 'https://rubygems.org'
 
 group :test, :development do
-  gem 'factory_girl_rails'
-  gem 'rspec-rails'
   gem 'colorize'
   gem 'annotate'
-  
-
   # This cause RSpec to output misunderstainding error message.
   # So, use this gem under group :development ( not :test)
   #gem 'better_errors'
@@ -20,7 +16,9 @@ group :development do
 end
 
 group :test do
+  gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'rspec-rails'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
