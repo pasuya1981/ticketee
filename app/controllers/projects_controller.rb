@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
 
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
+
   def index
   	@projects = Project.order :name
   end
 
   def show
-  	@project = Project.find(params[:id])
   end
 
   def new
@@ -25,12 +26,9 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def update
-
-    @project = Project.find(params[:id])
 
     if @project.update(project_params)
       redirect_to projects_path, notice: 'Project has been updated.'
@@ -42,13 +40,20 @@ class ProjectsController < ApplicationController
 
   def destroy
 
-    project = Project.find(params[:id])
-    project.destroy
+    @project.destroy
     flash[:notice] = "Project has been destroyed."
     redirect_to projects_path
   end
 
   private
+
+    def set_project
+      begin
+        @project = Project.find(params[:id])
+      rescue
+        redirect_to projects_path, alert: "The project you were looking for cound not be found."
+      end
+    end
 
     def project_params
       params.require(:project).permit(:name, :description)
