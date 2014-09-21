@@ -41,7 +41,7 @@ end
 RSpec.configure do |config|
 
   config.include AuthHelpers, type: :controller
-  config.include FeatureHelper, type: :feature
+  config.include FeatureHelper, type: :feature # specs under feature/.. can use the module methods.
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
