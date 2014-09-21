@@ -10,6 +10,7 @@ end
 
 group :development do
   # Neat output on terminal console.
+  gem 'faker'
   gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'better_errors'

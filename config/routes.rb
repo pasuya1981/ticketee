@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   #match 'projects/:id', to: 'projects#update', via: [:patch, :put]
   #match 'projects/:id', to: 'projects#destroy', via: :delete
 
+  get '/signout', to: 'sessions#destroy'
   post '/signin', to: 'sessions#create'
   get '/signin', to: 'sessions#new'
   resources :users

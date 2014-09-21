@@ -16,6 +16,11 @@ class SessionsController < ApplicationController
   	end
   end
 
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_url, notice: 'You have logged out successfully.'
+  end
+
   private
 
     def signin_params
