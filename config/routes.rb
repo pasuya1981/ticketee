@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   #match 'projects/:id', to: 'projects#update', via: [:patch, :put]
   #match 'projects/:id', to: 'projects#destroy', via: :delete
 
+  resources :users
   resources :projects do
 
     resources :tickets
