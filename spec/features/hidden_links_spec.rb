@@ -4,6 +4,7 @@ feature 'Hidden links' do
 
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:admin_user) }
+  let(:project) { FactoryGirl.create(:project) }
 
   context "Anonymous users" do
 
@@ -11,6 +12,16 @@ feature 'Hidden links' do
   	  visit '/'
   	  expect(page).to_not have_css('a', text: 'New Project')
   	end
+
+    scenario 'Cannot see the Edit Project link' do
+      visit project_path(project)
+      expect(page).to_not have_css('a', text: 'Edit Project')
+    end
+
+    scenario 'Cannot see the Delete Project link' do
+      visit project_path(project)
+      expect(page).to_not have_css('a', text: 'Delete Project')
+    end
   end
 
   context "Regular users" do
@@ -24,6 +35,16 @@ feature 'Hidden links' do
   	  expect(page).to_not have_css('a', text: 'New Project')
       expect(feature_module_testor).to eq('test')
   	end
+
+    scenario 'Cannot see the Edit Project link' do
+      visit project_path(project)
+      expect(page).to_not have_css('a', text: 'Edit Project')
+    end
+
+    scenario 'Cannot see the Delete Project link' do
+      visit project_path(project)
+      expect(page).to_not have_css('a', text: 'Delete Project')
+    end
   end
 
   context 'Admin users' do
@@ -36,6 +57,16 @@ feature 'Hidden links' do
   	  visit '/'
   	  expect(find_link('New Project').visible?).to be(true)
   	end
+
+    scenario 'Cannot see the Edit Project link' do
+      visit project_path(project)
+      expect(page).to have_css('a', text: 'Edit Project')
+    end
+
+    scenario 'Cannot see the Delete Project link' do
+      visit project_path(project)
+      expect(page).to have_css('a', text: 'Delete Project')
+    end
   end
 
   def sign_in(user)
