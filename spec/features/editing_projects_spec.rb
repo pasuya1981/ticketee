@@ -2,7 +2,16 @@ require 'rails_helper'
 
 feature "Editing projects" do
 
-  before(:each) do
+  let(:admin_user) { FactoryGirl.create(:admin_user) }
+
+  before do
+
+    visit '/'
+    click_link 'Sign in'
+    fill_in 'Name', with: admin_user.name
+    fill_in 'Password', with: admin_user.password
+    click_button 'Sign in'
+
     FactoryGirl.create(:project, name: "TextMate 2")
   	visit '/'
   	click_link 'TextMate 2'
