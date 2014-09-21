@@ -36,6 +36,14 @@ module FeatureHelper
   def feature_module_testor
     'test'
   end
+
+  def sign_in_as!(user)
+    visit '/'
+    click_link 'Sign in'
+    fill_in 'Name', with: user.name
+    fill_in 'Password', with: user.password
+    click_button 'Sign in'
+  end
 end
 
 RSpec.configure do |config|
