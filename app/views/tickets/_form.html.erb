@@ -1,0 +1,32 @@
+<h2>Creating Ticket</h2>
+<fieldset>
+	<legend>Enter Ticket Information</legend>
+
+	<%= form_for(@ticket, url: project_tickets_path) do |f| %>
+
+	  <% if @ticket.errors.any? %>
+	    <div id="error_explanation">
+	      <h4><%= pluralize(@ticket.errors.count, 'error') %>
+	      prohibited this ticket from being saved:</h4>
+
+	      <ul>
+	      	<% @ticket.errors.full_messages.each do |msg| %>
+	          <li><%= msg %></li>
+	      	<% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+
+	  <div class="field">
+	    <%= f.label :title %>
+	    <%= f.text_field :title %>
+	  </div>
+
+	  <div class="field">
+	    <%= f.label :description %>
+	    <%= f.text_area :description %>
+	  </div>
+
+	  <%= f.submit %>
+	<% end %>
+</fieldset>
