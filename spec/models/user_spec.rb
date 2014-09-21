@@ -25,9 +25,20 @@ RSpec.describe User, :type => :model do
 
   describe "Password" do
 
+    it 'requires an email' do
+      u = User.new(name: 'steve', password: 'password', password_confirmation: 'password')
+      u.save
+      expect(u).to_not be_valid
+
+      u.email = 'steve@example.com'
+      u.save
+      expect(u).to be_valid
+
+    end
+
   	it "need a password and confirmation to save" do
 
-  	  u = User.new(name: 'steve')
+  	  u = User.new(name: 'steve', email: 'steve@example.com')
 
   	  u.save
   	  expect(u).to_not be_valid
