@@ -8,6 +8,7 @@
 #  password_digest :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
+#  admin           :boolean          default(FALSE)
 #
 
 FactoryGirl.define do
@@ -18,5 +19,9 @@ FactoryGirl.define do
   	email 'user-wow@gmail.com'
   	password 'password_9999'
   	password_confirmation 'password_9999'
+
+  	factory :admin_user do
+  	  admin true
+  	end
   end
 end
