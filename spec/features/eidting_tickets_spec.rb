@@ -23,6 +23,7 @@ feature "Editing tickets" do
   end
 
   scenario "Updating a ticket with invalid information" do
+  	
     fill_in "Title", with: ""
     click_button "Update Ticket"
     expect(page).to have_content("Ticket has not been updated.")
