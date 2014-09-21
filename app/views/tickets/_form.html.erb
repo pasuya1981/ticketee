@@ -2,7 +2,7 @@
 <fieldset>
 	<legend>Enter Ticket Information</legend>
 
-	<%= form_for(@ticket, url: project_tickets_path) do |f| %>
+	<%= form_for [@project, @ticket] do |f| %>
 
 	  <% if @ticket.errors.any? %>
 	    <div id="error_explanation">
