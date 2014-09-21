@@ -1,5 +1,6 @@
 class TicketsController < ApplicationController
 
+  before_action :require_signin!, except: [:show, :index]
   before_action :set_project
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
@@ -13,7 +14,10 @@ class TicketsController < ApplicationController
 
 
   def create
+
     @ticket = @project.tickets.build(ticket_params)
+    @ticket.user = current_user
+    
     if @ticket.save
       flash[:notice] = 'Ticket has been created.'
       redirect_to [@project, @ticket] # eql to project_ticket_path(@project, @ticket)
@@ -42,6 +46,19 @@ class TicketsController < ApplicationController
   end
 
   private
+
+    def require_signin!
+
+      if current_user.nil?
+
+        flash[:error] = "You need to sign in or sign up before continuing."
+        redirect_to signin_url
+      end
+    end
+
+    def current_user
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    end
 
     def set_project
       @project = Project.find(params[:project_id])

@@ -2,10 +2,22 @@ require 'rails_helper'
 
 feature "Editing tickets" do
   let!(:project) { FactoryGirl.create(:project) }
-  let!(:ticket) { FactoryGirl.create(:ticket, project: project) }
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:ticket) do
+    ticket = FactoryGirl.create(:ticket, project: project)
+    ticket.update(:user => user)
+    ticket
+  end
+  
 
   before do
     visit '/'
+
+    click_link 'Sign in'
+    fill_in 'Name', with: user.name
+    fill_in 'Password', with: user.password
+    click_button 'Sign in'
+
     click_link project.name
     click_link ticket.title
     click_link 'Edit Ticket'

@@ -1,7 +1,10 @@
 <div id="ticket">
   <h2><%= @ticket.title %></h2>
   <%= simple_format(@ticket.description) %>
+  <span id="author">Created by <%= @ticket.user.email %></span>
 </div>
+
+
 
 <%= link_to 'Edit Ticket', [:edit, @project, @ticket] %><br>
 <%= link_to 'Delete Ticket', [@project, @ticket], method: :delete %><br>
