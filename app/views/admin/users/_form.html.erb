@@ -12,5 +12,10 @@
   	<%= f.password_field :password %>
   </div>
 
+  <div class="field">
+  	<%= f.check_box :admin %>
+  	<%= f.label :admin, "Is an admin?" %>
+  </div>
+
   <%= f.submit %>
 <% end %>
