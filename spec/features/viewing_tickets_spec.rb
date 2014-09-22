@@ -17,7 +17,9 @@ feature 'Viewing tickets' do
                                                 description: "Isn't a joke") }
   
   
-  before do    
+  before do
+    visit project_url(project_1)
+    expect(page).to_not have_content(project_1_ticket.title)
     sign_in_as!(user)
     Project.all.each { |pro| define_permission!(user, :view, pro) }
     visit '/'

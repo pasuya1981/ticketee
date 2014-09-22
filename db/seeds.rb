@@ -21,6 +21,10 @@ end
 10.times do |n|
   project = Project.create(name: Faker::Commerce.product_name)
   Permission.create(user: user, action: 'view', thing: project)
+  5.times { |n| Ticket.create(project: project, 
+  							  user: admin, 
+  							  title: Faker::Commerce.product_name,
+  							  description: Faker::Lorem.paragraph ) }
 end
 
 
