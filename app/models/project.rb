@@ -10,6 +10,10 @@
 #
 
 class Project < ActiveRecord::Base
+
   validates_presence_of :name
   has_many :tickets, dependent: :destroy
+  has_many :permissions, as: :thing
+
+  scope :viewable_by, ->(user) { joins(:permissions).where(permissions: { action: 'view', user_id: user.id }) }
 end

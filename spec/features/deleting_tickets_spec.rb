@@ -4,17 +4,13 @@ feature 'Deleting tickets' do
 
   let!(:project) { FactoryGirl.create(:project, name: 'project name') }
   let!(:user) { FactoryGirl.create(:user) }
-  let!(:ticket) { FactoryGirl.create(:ticket, title: 'Ticket title', project: project, user: user) }
+  let!(:ticket) { FactoryGirl.create(:ticket, title: 'This Is A Ticket Title', project: project, user: user) }
   
 
   before do
 
-  	visit '/'
-
-    click_link 'Sign in'
-    fill_in 'Name', with: user.name
-    fill_in 'Password', with: user.password
-    click_button 'Sign in'
+  	sign_in_as!(user)
+    define_permission!(user, :view, project)
     
   	click_link project.name
   	click_link ticket.title

@@ -10,13 +10,17 @@ Project.delete_all
 Ticket.delete_all
 User.delete_all
 
-20.times do |n|
+admin = User.create(name: 'admin', password: 'admin', email: 'admin@admin.com', admin: true)
+user = User.create(name: 'user', password: 'user', email: 'user@user.com')
+
+5.times do |n|
   User.create(name: Faker::Name.name, email: Faker::Internet.email, password: 'qqqq')
 end
 
-50.times do |n|
-  Project.create(name: Faker::Commerce.product_name)
+10.times do |n|
+  project = Project.create(name: Faker::Commerce.product_name)
+  User.all.each { |user| Permission.create(user: user, action: 'view', thing: project) }
+  Permission.create(user: user, action: 'view', thing: project)
 end
 
-User.create(name: 'admin', password: 'admin', email: 'admin@admin.com', admin: true)
-User.create(name: 'user', password: 'user', email: 'user@user.com')
+

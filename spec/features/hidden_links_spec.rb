@@ -33,7 +33,7 @@ feature 'Hidden links' do
   	scenario 'Cannot see the New Project link' do
   	  visit '/'
   	  expect(page).to_not have_css('a', text: 'New Project')
-      expect(feature_module_testor).to eq('test')
+      
   	end
 
     scenario 'Cannot see the Edit Project link' do

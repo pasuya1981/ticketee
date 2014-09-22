@@ -2,11 +2,18 @@ require 'rails_helper'
 
 feature "Viewing projects" do
 
-  scenario "Listing all projects" do
-  	project = FactoryGirl.create(:project, name: "TaxeMate 2")
-  	visit '/'
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:project) { FactoryGirl.create(:project) }
 
-  	click_link 'TaxeMate 2'
+  before do
+  	sign_in_as!(user)
+  	define_permission!(user, :view, project)
+  end
+
+  scenario "Listing all projects" do
+
+  	visit '/'
+  	click_link project.name
   	expect(page.current_url).to eql(project_url(project))
   end
 end

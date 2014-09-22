@@ -9,15 +9,13 @@ feature "Creating Tickets" do
 
     visit '/'
     click_link project.name
-    click_link "New Ticket"
 
     message = "You need to sign in or sign up before continuing."
     expect(page).to have_content(message)
 
-    fill_in 'Name', with: user.name
-    fill_in 'Password', with: user.password
-    click_button 'Sign in'
-
+    sign_in_as! user
+    define_permission!(user, :view, project)
+    
     click_link project.name
     click_link 'New Ticket'
   end
