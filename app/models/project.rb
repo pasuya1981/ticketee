@@ -16,4 +16,5 @@ class Project < ActiveRecord::Base
   has_many :permissions, as: :thing
 
   scope :viewable_by, ->(user) { joins(:permissions).where(permissions: { action: 'view', user_id: user.id }) }
+  scope :for, ->(user) { user.admin? ? Project.all : Project.viewable_by(user) }
 end

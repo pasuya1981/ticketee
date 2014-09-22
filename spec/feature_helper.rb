@@ -7,6 +7,11 @@ module FeatureHelper
   	Permission.create!(user: user, action: action, thing: thing)
   end
 
+  def sign_out!
+    visit '/'
+    click_link 'Sign out'
+  end
+
   def sign_in_as!(user)
     visit '/'
     click_link 'Sign in'

@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 
-  before_action :require_signin!, only: :show
+  before_action :require_signin!, only: [:show, :index]
   before_action :authorize_admin!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
@@ -51,11 +51,7 @@ class ProjectsController < ApplicationController
 
     def set_project
       begin
-        @project = if current_user.admin? 
-          Project.find(params[:id]) 
-        else 
-          Project.viewable_by(current_user).find(params[:id])
-        end
+        @project = Project.for(current_user).find(params[:id])
       rescue
         redirect_to projects_path, alert: "The project you were looking for could not be found."
       end

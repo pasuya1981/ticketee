@@ -12,6 +12,7 @@ User.delete_all
 
 admin = User.create(name: 'admin', password: 'admin', email: 'admin@admin.com', admin: true)
 user = User.create(name: 'user', password: 'user', email: 'user@user.com')
+guest = User.create(name: 'guest', password: 'guest', email: 'guest@guest.com')
 
 5.times do |n|
   User.create(name: Faker::Name.name, email: Faker::Internet.email, password: 'qqqq')
@@ -19,7 +20,6 @@ end
 
 10.times do |n|
   project = Project.create(name: Faker::Commerce.product_name)
-  User.all.each { |user| Permission.create(user: user, action: 'view', thing: project) }
   Permission.create(user: user, action: 'view', thing: project)
 end
 

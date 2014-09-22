@@ -8,7 +8,7 @@ feature "Creating Tickets" do
   before do
 
     visit '/'
-    click_link project.name
+    expect(page).to_not have_content(project.name)
 
     message = "You need to sign in or sign up before continuing."
     expect(page).to have_content(message)
