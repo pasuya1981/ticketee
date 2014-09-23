@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'cancan'
+
 group :test, :development do
   gem 'colorize'
   gem 'annotate'

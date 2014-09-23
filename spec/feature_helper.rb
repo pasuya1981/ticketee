@@ -26,6 +26,10 @@ module AuthHelpers
   def sign_in(user)
     session[:user_id] = user.id
   end
+
+  def define_permission!(user, action, thing)
+    Permission.create(user: user, action: action, thing: thing)
+  end
 end
 
 # Configure RSpec to load module for Capybara-feature-test & RSpec-controller-test.

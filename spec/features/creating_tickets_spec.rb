@@ -15,6 +15,8 @@ feature "Creating Tickets" do
 
     sign_in_as! user
     define_permission!(user, :view, project)
+    define_permission!(user, 'create tickets', project)
+
     
     click_link project.name
     click_link 'New Ticket'
