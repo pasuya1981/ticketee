@@ -2,7 +2,9 @@
 
 <h2><%= @project.name %></h2>
 
-<%= link_to 'New Ticket', new_project_ticket_path(@project) %><br>
+<% authorized?(:"create tickets", @project) do %>
+  <%= link_to 'New Ticket', new_project_ticket_path(@project) %><br>
+<% end %>
 <% admin_only do %>
   <%= link_to 'Edit Project', edit_project_path(@project) %><br>
   <%= link_to 'Delete Project', @project, method: :delete, data: { confirm: 'Are you sure?' } %><br>

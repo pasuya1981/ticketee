@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def authorized?(permission, thing, &block)
+    block.call if can?(permission.to_sym, thing) || current_user.admin?
+  end
+
   def admin_user?
   	user = User.find_by(session[:user_id])
   	if user && user.admin

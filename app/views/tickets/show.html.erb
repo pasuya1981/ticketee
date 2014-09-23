@@ -5,6 +5,11 @@
 </div>
 
 
+<% authorized?('edit tickets', @project) do %>
+  <%= link_to 'Edit Ticket', [:edit, @project, @ticket] %><br>
+<% end %>
 
-<%= link_to 'Edit Ticket', [:edit, @project, @ticket] %><br>
-<%= link_to 'Delete Ticket', [@project, @ticket], method: :delete %><br>
+<% authorized?('delete tickets', @project) do %>
+  <%= link_to 'Delete Ticket', [@project, @ticket], method: :delete, data: { confirm: 'Are you sure you want to delete the ticket?' } %><br>
+<% end %>
+

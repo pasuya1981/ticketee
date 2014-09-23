@@ -13,7 +13,7 @@
 
 FactoryGirl.define do
   factory :ticket do
-    title 'Example Ticket'
-    description 'An example ticket, nothing more'
+    title 'Test ticket title'
+    description 'Test ticket description'
   end
 end
