@@ -11,12 +11,18 @@ RSpec.describe TicketsController, :type => :controller do
   	before do
   	  sign_in(user)
   	  define_permission!(user, 'view', project)
+  	  #define_permission!(user, 'delete tickets', project)
   	end
 
   	def cannot_create_tickets!
   	  expect(response).to redirect_to(project)
   	  message = "You cannot create tickets on this project."
   	  expect(flash[:alert]).to eq(message)
+  	end
+
+  	def cannot_update_tickets!
+  	  expect(response).to redirect_to(project)
+  	  expect(flash[:alert]).to eq("You cannot edit tickets on this project.")
   	end
 
   	it "cannot begin to create a ticket" do
@@ -27,6 +33,24 @@ RSpec.describe TicketsController, :type => :controller do
     it "cannot create a ticket without permission" do
       post :create, project_id: project
       cannot_create_tickets!
+    end
+
+    it "cannot edit a ticket without permission" do
+      get :edit, { project_id: project.id, id: ticket.id }
+      cannot_update_tickets!
+    end
+
+    it "cannot update a ticket without permission" do
+      put :update, { project_id: project.id, id: ticket.id, ticket: {  } }
+      cannot_update_tickets!
+    end
+
+    it "cannot delete a ticket without permission" do
+      delete :destroy, project_id: project.id, id: ticket.id
+
+      expect(response).to redirect_to(project)
+      message = "You cannot delete tickets from this project."
+      expect(flash[:alert]).to eq(message)
     end
   end
 
